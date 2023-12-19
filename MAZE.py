@@ -148,8 +148,6 @@ class Maze:
     def dijkstra(self): ...
     def gbf(self): ...
     def bellman(self): ...
-    def prim(self): ...
-    def krushal(self): ...
 
     def show(self, algo_names, agent_color=COLOR.green, _filled=True, _footprint=True):
         path = []
@@ -198,7 +196,7 @@ class App(customtkinter.CTk):
         self.path : Dict = None
         self._filled = True
         self._footprints = True
-        self._algo = {'DFS' : True, 'BFS' : False, 'aStar' : False, 'Dijsktra' : False, 'Bellman' : False, 'Prim' : False, 'Krushkal' : False}
+        self._algo = {'DFS' : True, 'BFS' : False, 'aStar' : False, 'Dijsktra' : False, 'Bellman' : False}
 
         #--- Window ---
         self.title("Maze GUI")
@@ -264,12 +262,6 @@ class App(customtkinter.CTk):
         self.sidebar_checkbox_6 = customtkinter.CTkCheckBox(master=self.scrollable_frame, text='Bellman', command=self.select_bell)
         self.sidebar_checkbox_6.grid(row=6, column=0, padx=20, pady=10)
 
-        self.sidebar_checkbox_7 = customtkinter.CTkCheckBox(master=self.scrollable_frame, text='Prim', command=self.select_prim)
-        self.sidebar_checkbox_7.grid(row=7, column=0, padx=20, pady=10)
-
-        self.sidebar_checkbox_8 = customtkinter.CTkCheckBox(master=self.scrollable_frame, text='Kruskal', command=self.select_krush)
-        self.sidebar_checkbox_8.grid(row=8, column=0, padx=20, pady=10)
-
         self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Appearance Mode:", anchor="w")
         self.appearance_mode_label.grid(row=5, column=0, padx=20, pady=(10, 0))
 
@@ -293,8 +285,6 @@ class App(customtkinter.CTk):
         self.sidebar_checkbox_4.configure(state='disabled')
         self.sidebar_checkbox_5.configure(state='disabled')
         self.sidebar_checkbox_6.configure(state='disabled')
-        self.sidebar_checkbox_7.configure(state='disabled')
-        self.sidebar_checkbox_8.configure(state='disabled')
 
     def change_maze_size(self, new_size: int):
         new_size = int(new_size/5) * 5
@@ -340,8 +330,6 @@ class App(customtkinter.CTk):
     def select_dij(self): ...
     def select_gbf(self): ...
     def select_bell(self): ...
-    def select_prim(self): ...
-    def select_krush(self): ...
 
     def change_filled(self):
         self._filled = False if self._filled else True
@@ -358,8 +346,6 @@ class App(customtkinter.CTk):
         if self._algo['aStar'] : algo_names.append('aStar')
         if self._algo['Dijsktra'] : algo_names.append('Dijsktra')
         if self._algo['Bellman'] : algo_names.append('Bellman')
-        if self._algo['Prim'] : algo_names.append('Prim')
-        if self._algo['Krushkal'] : algo_names.append('Krushkal')
 
         if not len(algo_names):
             self.textbox.insert('0.0', '>>>(Error) No Algorithm Selected!\n')
